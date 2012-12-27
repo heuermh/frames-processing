@@ -20,7 +20,7 @@
     <http://www.gnu.org/licenses/>.
 
 */
-import animation.*;
+import org.dishevelled.processing.animation.*;
 
 Animations animations;
 

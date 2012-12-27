@@ -20,7 +20,7 @@
     <http://www.gnu.org/licenses/>.
 
 */
-package animation;
+package org.dishevelled.processing.animation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +28,16 @@ import java.util.List;
 import processing.core.PImage;
 
 /**
- * Multiple frames animation.
+ * Looped frames animation.
  *
  * @author  Michael Heuer
  */
-public final class MultipleFramesAnimation implements Animation
+public final class LoopedFramesAnimation implements Animation
 {
     private int index = 0;
     private final List<PImage> frames;
 
-    MultipleFramesAnimation(final List<PImage> frames)
+    LoopedFramesAnimation(final List<PImage> frames)
     {        
         if (frames == null)
         {
@@ -51,15 +51,14 @@ public final class MultipleFramesAnimation implements Animation
     }
 
 
-    public void reset()
-    {
-        index = 0;
-    }
-
     @Override
     public boolean advance()
     {
-        index = Math.min(index + 1, frames.size() - 1);
+        index++;
+        if (index == frames.size())
+        {
+            index = 0;
+        }
         return true;
     }
 

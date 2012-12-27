@@ -20,38 +20,8 @@
     <http://www.gnu.org/licenses/>.
 
 */
-package animation;
-
-import processing.core.PImage;
 
 /**
- * Single frame animation.
- *
- * @author  Michael Heuer
+ * Animation library for Processing.
  */
-public final class SingleFrameAnimation implements Animation
-{
-    private final PImage currentFrame;
-
-    SingleFrameAnimation(final PImage currentFrame)
-    {        
-        if (currentFrame == null)
-        {
-            throw new NullPointerException("currentFrame must not be null");
-        }
-        this.currentFrame = currentFrame;
-    }
-
-
-    @Override
-    public boolean advance()
-    {
-        return false;
-    }
-
-    @Override
-    public PImage getCurrentFrame()
-    {
-        return currentFrame;
-    }
-}
+package org.dishevelled.processing.animation;

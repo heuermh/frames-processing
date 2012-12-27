@@ -20,51 +20,17 @@
     <http://www.gnu.org/licenses/>.
 
 */
-package animation;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.dishevelled.processing.animation;
 
 import processing.core.PImage;
 
 /**
- * Looped frames animation.
+ * One or more frames in an animation.
  *
  * @author  Michael Heuer
  */
-public final class LoopedFramesAnimation implements Animation
+public interface Animation
 {
-    private int index = 0;
-    private final List<PImage> frames;
-
-    LoopedFramesAnimation(final List<PImage> frames)
-    {        
-        if (frames == null)
-        {
-            throw new NullPointerException("frames must not be null");
-        }
-        if (frames.isEmpty())
-        {
-            throw new IllegalArgumentException("frames must not be empty");
-        }
-        this.frames = new ArrayList<PImage>(frames);
-    }
-
-
-    @Override
-    public boolean advance()
-    {
-        index++;
-        if (index == frames.size())
-        {
-            index = 0;
-        }
-        return true;
-    }
-
-    @Override
-    public PImage getCurrentFrame()
-    {
-        return frames.get(index);
-    }
+    boolean advance();
+    PImage getCurrentFrame();
 }

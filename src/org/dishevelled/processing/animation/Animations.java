@@ -20,7 +20,7 @@
     <http://www.gnu.org/licenses/>.
 
 */
-package animation;
+package org.dishevelled.processing.animation;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
