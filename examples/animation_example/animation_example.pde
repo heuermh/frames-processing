@@ -1,28 +1,28 @@
 /*
 
-    Animation library for Processing.
+    Frames animation library for Processing.
     Copyright (c) 2012 held jointly by the individual authors.
 
-    This file is part of Animation library for Processing.
+    This file is part of Frames animation library for Processing.
 
-    Animation library for Processing is free software: you can redistribute it and/or
+    Frames animation library for Processing is free software: you can redistribute it and/or
     modify it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Animation library for Processing is distributed in the hope that it will be
+    Frames animation library for Processing is distributed in the hope that it will be
     useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Animation library for Processing.  If not, see
+    along with Frames animation library for Processing.  If not, see
     <http://www.gnu.org/licenses/>.
 
 */
-import org.dishevelled.processing.animation.*;
+import org.dishevelled.processing.frames.*;
 
-Animations animations;
+Frames frames;
 
 Animation hatRight;
 Animation hatLeft;
@@ -42,7 +42,7 @@ void setup()
   size(16*30, 9*30);
   frameRate(12);
   background(20);
-  animations = new Animations(this);
+  frames = new Frames(this);
 
   //
   // example derived from darwin_award, an entry for Ludum Dare 24
@@ -52,17 +52,17 @@ void setup()
   // Licensed GPL version 3 or later, copyright updated by the author for inclusion here
   //
 
-  List<PImage> hatFrames = animations.createFrameList("hat.png", 0, 0, 24, 24, 4);
-  hatRight = animations.createLoopedAnimation(hatFrames);
-  hatLeft = animations.createLoopedAnimation(animations.flipHorizontally(hatFrames));
+  List<PImage> hatFrames = frames.createFrameList("hat.png", 0, 0, 24, 24, 4);
+  hatRight = frames.createLoopedAnimation(hatFrames);
+  hatLeft = frames.createLoopedAnimation(frames.flipHorizontally(hatFrames));
 
-  List<PImage> hatInfectedFrames = animations.createFrameList("hat-infected.png", 0, 0, 24, 24, 4);
-  hatInfectedRight = animations.createLoopedAnimation(hatInfectedFrames);
-  hatInfectedLeft = animations.createLoopedAnimation(animations.flipHorizontally(hatInfectedFrames));
+  List<PImage> hatInfectedFrames = frames.createFrameList("hat-infected.png", 0, 0, 24, 24, 4);
+  hatInfectedRight = frames.createLoopedAnimation(hatInfectedFrames);
+  hatInfectedLeft = frames.createLoopedAnimation(frames.flipHorizontally(hatInfectedFrames));
 
-  List<PImage> hatDeceasedFrames = animations.createFrameList("hat-deceased.png", 0, 0, 24, 24, 16);
-  hatDeceasedRight = animations.createAnimation(hatDeceasedFrames);
-  hatDeceasedLeft = animations.createAnimation(hatDeceasedFrames);
+  List<PImage> hatDeceasedFrames = frames.createFrameList("hat-deceased.png", 0, 0, 24, 24, 16);
+  hatDeceasedRight = frames.createAnimation(hatDeceasedFrames);
+  hatDeceasedLeft = frames.createAnimation(hatDeceasedFrames);
 }
 
 void draw()
