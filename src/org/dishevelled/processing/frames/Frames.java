@@ -224,42 +224,29 @@ public final class Frames
         return flippedFrames;
     }
 
+    public PImage flipVertically(final PImage image)
+    {
+        checkNotNull(image, "image must not be null");
+        PImage flipped = new PImage(image.width, image.height, PImage.ARGB);
+        for (int i = 0; i < image.width; i++)
+        {
+            for (int j = 0; j < image.height; j++)
+            {
+                flipped.set(i, image.height - 1 - j, image.get(i, j));
+            }
+        }
+        return flipped;
+    }
+
     public List<PImage> flipVertically(final List<PImage> frameImages)
     {
         checkNotNull(frameImages, "frameImages must not be null");
-        int width = 0;
-        int height = 0;
-        for (PImage image : frameImages)
+        List<PImage> flippedFrames = new ArrayList<PImage>(frameImages.size());
+        for (PImage frame : frameImages)
         {
-            if (image.width > width)
-            {
-                width = image.width;
-            }
-            if (image.height > height)
-            {
-                height = image.height;
-            }
+            flippedFrames.add(flipVertically(frame));
         }
-        BufferedImage spriteSheet = new BufferedImage(width * frameImages.size(), height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D graphics = spriteSheet.createGraphics();
-        graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        for (int i = 0, size = frameImages.size(); i < size; i++)
-        {
-            PImage image = frameImages.get(i);
-            double cx = image.width / 2.0d;
-            double cy = image.height / 2.0d;
-            double x = width * i + (width / 2.0d) - cx;
-            double y = (height / 2.0d) - cy;
-
-            AffineTransform rotate = new AffineTransform();
-            rotate.translate(cx, cy);
-            rotate.concatenate(new AffineTransform(new double[] { -1.0d, 0.0d, 0.0d, 1.0d }));
-            rotate.translate(-cx, -cy);
-            graphics.setTransform(rotate);
-            graphics.drawImage(image.getImage(), (int) x, (int) y, null);
-        }
-        graphics.dispose();
-        return createFrameList(new PImage(spriteSheet), 0, 0, width, height, frameImages.size());
+        return flippedFrames;
     }
 
     public List<PImage> rotate(final PImage image, final int steps)
