@@ -20,7 +20,10 @@
     <http://www.gnu.org/licenses/>.
 
 */
-import org.dishevelled.processing.frames.*;
+import java.util.List;
+
+import org.dishevelled.processing.frames.Animation;
+import org.dishevelled.processing.frames.Frames;
 
 Frames frames;
 
