@@ -29,6 +29,7 @@ import java.awt.geom.AffineTransform;
 
 import java.awt.image.BufferedImage;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -109,6 +110,24 @@ public final class Frames
     {
         checkNotNull(images, "images must not be null");
         return new LoopedFramesAnimation(images);
+    }
+
+    /**
+     * @since 1.1
+     */
+    public MultipleFramesAnimation createAnimation(final PImage... images)
+    {
+        checkNotNull(images, "images must not be null");
+        return createAnimation(Arrays.asList(images));
+    }
+
+    /**
+     * @since 1.1
+     */
+    public LoopedFramesAnimation createLoopedAnimation(final PImage... images)
+    {
+        checkNotNull(images, "images must not be null");
+        return createLoopedAnimation(Arrays.asList(images));
     }
 
     public List<PImage> createFrameList(final String imageName, final String suffix, final int frames)
@@ -194,6 +213,15 @@ public final class Frames
         return new PImage(spriteSheet);
     }
 
+    /**
+     * @since 1.1
+     */
+    public PImage createSpriteSheet(final PImage... frameImages)
+    {
+        checkNotNull(frameImages, "frameImages must not be null");
+        return createSpriteSheet(Arrays.asList(frameImages));
+    }
+
     public PImage createSpriteSheet(final String imageName, final String suffix, final int frames)
     {
         return createSpriteSheet(createFrameList(imageName, suffix, frames));
@@ -224,6 +252,15 @@ public final class Frames
         return flippedFrames;
     }
 
+    /**
+     * @since 1.1
+     */
+    public List<PImage> flipHorizontally(final PImage... frameImages)
+    {
+        checkNotNull(frameImages, "frameImages must not be null");
+        return flipHorizontally(Arrays.asList(frameImages));
+    }
+
     public PImage flipVertically(final PImage image)
     {
         checkNotNull(image, "image must not be null");
@@ -247,6 +284,15 @@ public final class Frames
             flippedFrames.add(flipVertically(frame));
         }
         return flippedFrames;
+    }
+
+    /**
+     * @since 1.1
+     */
+    public List<PImage> flipVertically(final PImage... frameImages)
+    {
+        checkNotNull(frameImages, "frameImages must not be null");
+        return flipVertically(Arrays.asList(frameImages));
     }
 
     public List<PImage> rotate(final PImage image, final int steps)
