@@ -1,7 +1,7 @@
 /*
 
     Frames animation library for Processing.
-    Copyright (c) 2012-2019 held jointly by the individual authors.
+    Copyright (c) 2012-2020 held jointly by the individual authors.
 
     This file is part of Frames animation library for Processing.
 
@@ -34,9 +34,18 @@ import processing.core.PImage;
  */
 public final class LoopedFramesAnimation implements Animation
 {
+    /** Index of the current frame. */
     private int index = 0;
+
+    /** List of frames. */
     private final List<PImage> frames;
 
+
+    /**
+     * Create a new looped frames animation with the specified list of frames.
+     *
+     * @param frames list of frames, must not be null
+     */
     LoopedFramesAnimation(final List<PImage> frames)
     {        
         if (frames == null)

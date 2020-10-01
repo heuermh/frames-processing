@@ -1,7 +1,7 @@
 /*
 
     Frames animation library for Processing.
-    Copyright (c) 2012-2019 held jointly by the individual authors.
+    Copyright (c) 2012-2020 held jointly by the individual authors.
 
     This file is part of Frames animation library for Processing.
 
@@ -31,6 +31,18 @@ import processing.core.PImage;
  */
 public interface Animation
 {
+    /**
+     * Advance this animation one frame.
+     *
+     * @return true if consumers of this animation should schedule a repaint
+     */
     boolean advance();
+
+    /**
+     * Return the current frame for this animation.
+     * The current frame will not be null.
+     *
+     * @return the current frame for this animation
+     */
     PImage getCurrentFrame();
 }

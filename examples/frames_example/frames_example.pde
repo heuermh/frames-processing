@@ -1,7 +1,7 @@
 /*
 
     Frames animation library for Processing.
-    Copyright (c) 2012-2019 held jointly by the individual authors.
+    Copyright (c) 2012-2020 held jointly by the individual authors.
 
     This file is part of Frames animation library for Processing.
 
@@ -42,7 +42,7 @@ boolean deceased = false;
 
 void setup()
 {
-  size(16*30, 9*30);
+  size(480, 270);
   frameRate(12);
   background(20);
   frames = new Frames(this);

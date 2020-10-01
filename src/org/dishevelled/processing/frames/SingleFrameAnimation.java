@@ -1,7 +1,7 @@
 /*
 
     Frames animation library for Processing.
-    Copyright (c) 2012-2019 held jointly by the individual authors.
+    Copyright (c) 2012-2020 held jointly by the individual authors.
 
     This file is part of Frames animation library for Processing.
 
@@ -31,8 +31,15 @@ import processing.core.PImage;
  */
 public final class SingleFrameAnimation implements Animation
 {
+    /** Current frame for this single frame animation. */
     private final PImage currentFrame;
 
+
+    /**
+     * Create a new single frame animation with the specified frame.
+     *
+     * @param currentFrame current frame, must not be null
+     */
     SingleFrameAnimation(final PImage currentFrame)
     {        
         if (currentFrame == null)

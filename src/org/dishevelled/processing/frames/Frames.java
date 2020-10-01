@@ -1,7 +1,7 @@
 /*
 
     Frames animation library for Processing.
-    Copyright (c) 2012-2019 held jointly by the individual authors.
+    Copyright (c) 2012-2020 held jointly by the individual authors.
 
     This file is part of Frames animation library for Processing.
 
@@ -44,68 +44,179 @@ import processing.core.PImage;
  */
 public final class Frames
 {
+    /** Applet for this frames library. */
     private final PApplet applet;
 
+
+    /**
+     * Create a new frames library for the specified applet.
+     *
+     * @applet applet, must not be null
+     */
     public Frames(final PApplet applet)
     {
         checkNotNull(applet, "applet must not be null");
         this.applet = applet;
     }
 
+    /**
+     * Create and return a new single frame animation from the specified image file name.
+     *
+     * @param imageName image file name, must not be null
+     * @return a new single frame animation from the specified image file name
+     */
     public SingleFrameAnimation createAnimation(final String imageName)
     {
         checkNotNull(imageName, "imageName must not be null");
         return createAnimation(applet.loadImage(imageName));
     }
 
+    /**
+     * Create and return a new single frame animation from the specified image.
+     *
+     * @param image image, must not be null
+     * @return a new single frame animation from the specified image
+     */
     public SingleFrameAnimation createAnimation(final PImage image)
     {
         checkNotNull(image, "image must not be null");
         return new SingleFrameAnimation(image);
     }
 
-    public MultipleFramesAnimation createAnimation(final String imageName, final String suffix, final int frames)
+    /**
+     * Create and return a new multiple frames animation containing all the frame images
+     * specified from <code>baseImage</code>.
+     *
+     * @param baseImage base image file or URL name, must not be null
+     * @param suffix image suffix, must not be null
+     * @param frames number of frames, must be at least one
+     * @return a new multiple frames animation containing all the frame images
+     *    specified from <code>baseImage</code>
+     */
+    public MultipleFramesAnimation createAnimation(final String baseImage, final String suffix, final int frames)
     {
-        return createAnimation(createFrameList(imageName, suffix, frames));
+        return createAnimation(createFrameList(baseImage, suffix, frames));
     }
 
-    public LoopedFramesAnimation createLoopedAnimation(final String imageName, final String suffix, final int frames)
+    /**
+     * Create and return a new looped frames animation containing all the frame images
+     * specified from <code>baseImage</code>.
+     *
+     * @param baseImage base image file or URL name, must not be null
+     * @param suffix image suffix, must not be null
+     * @param frames number of frames, must be at least one
+     * @return a new looped frames animation containing all the frame images
+     *    specified from <code>baseImage</code>
+     */
+    public LoopedFramesAnimation createLoopedAnimation(final String baseImage, final String suffix, final int frames)
     {
-        return createLoopedAnimation(createFrameList(imageName, suffix, frames));
+        return createLoopedAnimation(createFrameList(baseImage, suffix, frames));
     }
 
-    public MultipleFramesAnimation createAnimation(final String imageName, final int x, final int y,
+    /**
+     * Create and return a new multiple frames animation containing all the frame images
+     * from <code>spriteSheet</code> as specified by the starting location <code>(x, y)</code>
+     * and read horizontally the specified number of frames.
+     *
+     * @param spriteSheet sprite sheet image name, must not be null
+     * @param x starting location x
+     * @param y starting location y
+     * @param width frame width
+     * @param height frame height
+     * @param frames number of frames
+     * @return a new multiple frames animation containing all the frame images
+     *    from <code>spriteSheet</code> as specified by the starting location <code>(x, y)</code>
+     *    and read horizontally the specified number of frames
+     */
+    public MultipleFramesAnimation createAnimation(final String spriteSheet, final int x, final int y,
                                                    final int width, final int height, final int frames)
     {
-        checkNotNull(imageName, "imageName must not be null");
-        return createAnimation(applet.loadImage(imageName), x, y, width, height, frames);
+        checkNotNull(spriteSheet, "spriteSheet must not be null");
+        return createAnimation(applet.loadImage(spriteSheet), x, y, width, height, frames);
     }
 
-    public MultipleFramesAnimation createAnimation(final PImage image, final int x, final int y,
+    /**
+     * Create and return a new multiple frames animation containing all the frame images
+     * from <code>spriteSheet</code> as specified by the starting location <code>(x, y)</code>
+     * and read horizontally the specified number of frames.
+     *
+     * @param spriteSheet sprite sheet image, must not be null
+     * @param x starting location x
+     * @param y starting location y
+     * @param width frame width
+     * @param height frame height
+     * @param frames number of frames
+     * @return a new multiple frames animation containing all the frame images
+     *    from <code>spriteSheet</code> as specified by the starting location <code>(x, y)</code>
+     *    and read horizontally the specified number of frames
+     */
+    public MultipleFramesAnimation createAnimation(final PImage spriteSheet, final int x, final int y,
                                                    final int width, final int height, final int frames)
     {
-        return createAnimation(createFrameList(image, x, y, width, height, frames));
+        return createAnimation(createFrameList(spriteSheet, x, y, width, height, frames));
     }
 
-    public LoopedFramesAnimation createLoopedAnimation(final String imageName, final int x, final int y,
+    /**
+     * Create and return a new looped frames animation containing all the frame images
+     * from <code>spriteSheet</code> as specified by the starting location <code>(x, y)</code>
+     * and read horizontally the specified number of frames.
+     *
+     * @param spriteSheet sprite sheet image name, must not be null
+     * @param x starting location x
+     * @param y starting location y
+     * @param width frame width
+     * @param height frame height
+     * @param frames number of frames
+     * @return a new looped frames animation containing all the frame images
+     *    from <code>spriteSheet</code> as specified by the starting location <code>(x, y)</code>
+     *    and read horizontally the specified number of frames
+     */
+    public LoopedFramesAnimation createLoopedAnimation(final String spriteSheet, final int x, final int y,
                                                        final int width, final int height, final int frames)
     {
-        checkNotNull(imageName, "imageName must not be null");
-        return createLoopedAnimation(applet.loadImage(imageName), x, y, width, height, frames);
+        checkNotNull(spriteSheet, "spriteSheet must not be null");
+        return createLoopedAnimation(applet.loadImage(spriteSheet), x, y, width, height, frames);
     }
 
-    public LoopedFramesAnimation createLoopedAnimation(final PImage image, final int x, final int y,
+    /**
+     * Create and return a new looped frames animation containing all the frame images
+     * from <code>spriteSheet</code> as specified by the starting location <code>(x, y)</code>
+     * and read horizontally the specified number of frames.
+     *
+     * @param spriteSheet sprite sheet image, must not be null
+     * @param x starting location x
+     * @param y starting location y
+     * @param width frame width
+     * @param height frame height
+     * @param frames number of frames
+     * @return a new looped frames animation containing all the frame images
+     *    from <code>spriteSheet</code> as specified by the starting location <code>(x, y)</code>
+     *    and read horizontally the specified number of frames
+     */
+    public LoopedFramesAnimation createLoopedAnimation(final PImage spriteSheet, final int x, final int y,
                                                        final int width, final int height, final int frames)
     {
-        return createLoopedAnimation(createFrameList(image, x, y, width, height, frames));
+        return createLoopedAnimation(createFrameList(spriteSheet, x, y, width, height, frames));
     }
 
+    /**
+     * Create and return a new multiple frames animation containing the specified frame images.
+     *
+     * @param images list of frame images, must not be null
+     * @return a new multiple frames animation containing the specified frame images
+     */
     public MultipleFramesAnimation createAnimation(final List<PImage> images)
     {
         checkNotNull(images, "images must not be null");
         return new MultipleFramesAnimation(images);
     }
 
+    /**
+     * Create and return a new looped frames animation containing the specified frame images.
+     *
+     * @param images list of frame images, must not be null
+     * @return a new looped frames animation containing the specified frame images
+     */
     public LoopedFramesAnimation createLoopedAnimation(final List<PImage> images)
     {
         checkNotNull(images, "images must not be null");
@@ -113,7 +224,11 @@ public final class Frames
     }
 
     /**
+     * Create and return a new multiple frames animation containing the specified frame images.
+     *
      * @since 1.1
+     * @param images one or more frame images, must not be null
+     * @return a new multiple frames animation containing the specified frame images
      */
     public MultipleFramesAnimation createAnimation(final PImage... images)
     {
@@ -122,7 +237,11 @@ public final class Frames
     }
 
     /**
+     * Create and return a new looped frames animation containing the specified frame images.
+     *
      * @since 1.1
+     * @param images one or more frame images, must not be null
+     * @return a new looped frames animation containing the specified frame images
      */
     public LoopedFramesAnimation createLoopedAnimation(final PImage... images)
     {
@@ -130,9 +249,19 @@ public final class Frames
         return createLoopedAnimation(Arrays.asList(images));
     }
 
-    public List<PImage> createFrameList(final String imageName, final String suffix, final int frames)
+    /**
+     * Create and return a new list of frame images containing all the frame images
+     * specified from <code>baseImage</code>.
+     *
+     * @param baseImage base image file or URL name, must not be null
+     * @param suffix image suffix, must not be null
+     * @param frames number of frames, must be at least one
+     * @return a new list of frame images containing all the frame images
+     *    specified from <code>baseImage</code>
+     */
+    public List<PImage> createFrameList(final String baseImage, final String suffix, final int frames)
     {
-        checkNotNull(imageName, "imageName must not be null");
+        checkNotNull(baseImage, "baseImage must not be null");
         checkNotNull(suffix, "suffix must not be null");
         if (frames < 1) {
             throw new IllegalArgumentException("frames must be at least 1");
@@ -142,23 +271,53 @@ public final class Frames
         List<PImage> images = new ArrayList<PImage>(frames);
         for (int frame = 0; frame < frames; frame++)
         {
-            PImage image = applet.loadImage(String.format(format, new Object[] { imageName, frame, suffix }));
+            PImage image = applet.loadImage(String.format(format, new Object[] { baseImage, frame, suffix }));
             images.add(image);
         }
         return Collections.unmodifiableList(images);
     }
 
-    public List<PImage> createFrameList(final String imageName, final int x, final int y,
+    /**
+     * Create and return a new list of frame images containing all the frame images
+     * from <code>spriteSheet</code> as specified by the starting location <code>(x, y)</code>
+     * and read horizontally the specified number of frames.
+     *
+     * @param spriteSheet sprite sheet image name, must not be null
+     * @param x starting location x
+     * @param y starting location y
+     * @param width frame width
+     * @param height frame height
+     * @param frames number of frames
+     * @return a new list of frame images containing all the frame images
+     *    from <code>spriteSheet</code> as specified by the starting location <code>(x, y)</code>
+     *    and read horizontally the specified number of frames
+     */
+    public List<PImage> createFrameList(final String spriteSheet, final int x, final int y,
                                         final int width, final int height, final int frames)
     {
-        checkNotNull(imageName, "imageName must not be null");
-        return createFrameList(applet.loadImage(imageName), x, y, width, height, frames);
+        checkNotNull(spriteSheet, "spriteSheet must not be null");
+        return createFrameList(applet.loadImage(spriteSheet), x, y, width, height, frames);
     }
 
-    public List<PImage> createFrameList(final PImage image, final int x, final int y,
+    /**
+     * Create and return a new list of frame images containing all the frame images
+     * from <code>spriteSheet</code> as specified by the starting location <code>(x, y)</code>
+     * and read horizontally the specified number of frames.
+     *
+     * @param spriteSheet sprite sheet image, must not be null
+     * @param x starting location x
+     * @param y starting location y
+     * @param width frame width
+     * @param height frame height
+     * @param frames number of frames
+     * @return a new list of frame images containing all the frame images
+     *    from <code>spriteSheet</code> as specified by the starting location <code>(x, y)</code>
+     *    and read horizontally the specified number of frames
+     */
+    public List<PImage> createFrameList(final PImage spriteSheet, final int x, final int y,
                                         final int width, final int height, final int frames)
     {
-        checkNotNull(image, "image must not be null");
+        checkNotNull(spriteSheet, "spriteSheet must not be null");
         if (x < 0) {
             throw new IllegalArgumentException("x must be at least 0");
         }
@@ -177,12 +336,18 @@ public final class Frames
         List<PImage> images = new ArrayList<PImage>(frames);
         for (int frame = 0; frame < frames; frame++)
         {
-            PImage subimage = new PImage(((BufferedImage) image.getImage()).getSubimage(x + (frame * width), y, width, height));
+            PImage subimage = spriteSheet.get(x + (frame * width), y, width, height);
             images.add(subimage);
         }
         return Collections.unmodifiableList(images);
     }
 
+    /**
+     * Create and return a sprite sheet image with the specified list of frame images.
+     *
+     * @param frameImages list of frame images, must not be null
+     * @return a sprite sheet images with the specified list of frame images
+     */
     public PImage createSpriteSheet(final List<PImage> frameImages)
     {
         checkNotNull(frameImages, "frameImages must not be null");
@@ -214,7 +379,11 @@ public final class Frames
     }
 
     /**
+     * Create and return a sprite sheet image with the specified frame images.
+     *
      * @since 1.1
+     * @param frameImages one or more frame images, must not be null
+     * @return a sprite sheet images with the specified list of frame images
      */
     public PImage createSpriteSheet(final PImage... frameImages)
     {
@@ -222,11 +391,27 @@ public final class Frames
         return createSpriteSheet(Arrays.asList(frameImages));
     }
 
-    public PImage createSpriteSheet(final String imageName, final String suffix, final int frames)
+    /**
+     * Create and return a new sprite sheet containing all the frame images
+     * specified from <code>baseImage</code>.
+     *
+     * @param baseImage base image file or URL name, must not be null
+     * @param suffix image suffix, must not be null
+     * @param frames number of frames, must be at least one
+     * @return a new sprite sheet containing all the frame images
+     *    specified from <code>baseImage</code>
+     */
+    public PImage createSpriteSheet(final String baseImage, final String suffix, final int frames)
     {
-        return createSpriteSheet(createFrameList(imageName, suffix, frames));
+        return createSpriteSheet(createFrameList(baseImage, suffix, frames));
     }
 
+    /**
+     * Flip the specified image horizontally.
+     *
+     * @param image image, must not be null
+     * @return the specified image flipped horizontally
+     */
     public PImage flipHorizontally(final PImage image)
     {
         checkNotNull(image, "image must not be null");
@@ -241,6 +426,12 @@ public final class Frames
         return flipped;
     }
 
+    /**
+     * Flip the specified frame images horizontally.
+     *
+     * @param frameImages list of frame images, must not be null
+     * @return the specified frame images flipped horizontally
+     */
     public List<PImage> flipHorizontally(final List<PImage> frameImages)
     {
         checkNotNull(frameImages, "frameImages must not be null");
@@ -253,7 +444,11 @@ public final class Frames
     }
 
     /**
+     * Flip the specified frame images horizontally.
+     *
      * @since 1.1
+     * @param frameImages one or more frame images, must not be null
+     * @return the specified frame images flipped horizontally
      */
     public List<PImage> flipHorizontally(final PImage... frameImages)
     {
@@ -261,6 +456,12 @@ public final class Frames
         return flipHorizontally(Arrays.asList(frameImages));
     }
 
+    /**
+     * Flip the specified image vertically.
+     *
+     * @param image image, must not be null
+     * @return the specified image flipped vertically
+     */
     public PImage flipVertically(final PImage image)
     {
         checkNotNull(image, "image must not be null");
@@ -275,6 +476,12 @@ public final class Frames
         return flipped;
     }
 
+    /**
+     * Flip the specified frame images vertically.
+     *
+     * @param frameImages list of frame images, must not be null
+     * @return the specified frame images flipped vertically
+     */
     public List<PImage> flipVertically(final List<PImage> frameImages)
     {
         checkNotNull(frameImages, "frameImages must not be null");
@@ -287,7 +494,11 @@ public final class Frames
     }
 
     /**
+     * Flip the specified frame images vertically.
+     *
      * @since 1.1
+     * @param frameImages one or more frame images, must not be null
+     * @return the specified frame images flipped vertically
      */
     public List<PImage> flipVertically(final PImage... frameImages)
     {
@@ -295,6 +506,13 @@ public final class Frames
         return flipVertically(Arrays.asList(frameImages));
     }
 
+    /**
+     * Rotate the specified image 360 degrees the specified number of steps.
+     *
+     * @param image image, must not be null
+     * @param steps number of steps, must be at least one
+     * @return the specified image rotated 360 degrees the specified number of steps
+     */
     public List<PImage> rotate(final PImage image, final int steps)
     {
         checkNotNull(image, "image must not be null");
